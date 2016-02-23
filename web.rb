@@ -10,26 +10,19 @@ end
 set :allow_origin, :any
 
 get '/' do
-  "Hello, world"
+  "Hello, sdp-doc app"
 end
 
 post '/sdp_order' do
-  # puts params
   rec = params[:record]
-  # puts '[log] called sdp_order!!!'
-
-  # create column name list
   cols = ['order_id','order_date','dest','work_name','place','construction_start','construction_end']
   cols.concat ['source_name', 'source_addr1', 'source_addr2', 'source_telno', 'source_faxno']
   order = SdpOrder.new()
-
-  # set value
   cols.each do |c|
     order.instance_variable_set("@#{c}", rec[c]['value'])
   end
-
-  order.write
-  return '/download'
+  file_name = order.write
+  return "/download/#{file_name}"
 end
 
 post '/sdp_payment' do
@@ -44,6 +37,11 @@ post '/sdp_payment' do
 end
 
 get '/download/:target' do
-  file_path = "/tmp/#{params[:target]}"
-  send_file(file_path) if File.exists?(file_path)
+  _file_path = "/tmp/#{params[:target]}"
+  # send_file(file_path) if File.exists?(file_path)
+  if File.exists?(_file_path)
+    send_file _file_path
+  else
+    status 404
+  end
 end

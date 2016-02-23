@@ -9,9 +9,9 @@ class SdpPayment < SdpDocument
     "/app/asset/source_payment.xlsx"
   end
 
-  def cells
-    # (4..10).map { |e| "C#{e}" }
-    ['C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10']
+  def get_output_path
+    now = Time.now.strftime('%Y%m%d%H%M%s')
+    file_path = "/tmp/#{now}_payment.xlsx"
   end
 
   def instance_variable_get(obj)
@@ -21,11 +21,6 @@ class SdpPayment < SdpDocument
     else
       super(obj)
     end
-  end
-
-  def get_output_path
-    now = Time.now.strftime('%Y%m%d%H%M%s')
-    file_path = "/tmp/#{now}_payment.xlsx"
   end
 
 end

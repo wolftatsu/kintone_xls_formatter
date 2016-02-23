@@ -1,13 +1,13 @@
-# Extended RubyXL's workbook object
 require 'rubyXL'
 require 'pry'
 
 class MyExWorkbook
   attr_accessor :file_path, :workbook, :worksheet
 
-  def initialize(file_path)
+  def initialize(file_path, worksheet_index = 0)
     @file_path = file_path
     @workbook = RubyXL::Parser.parse(@file_path)
+    @worksheet = workbook.worksheets[worksheet_index]
   end
 
   def save()
@@ -22,6 +22,11 @@ class MyExWorkbook
     return @workbook.defined_names.each_with_object({}) do |e, o|
       o[e.name] = convert_cell_addr(e.reference)
     end
+  end
+
+  def cell(addr="A1")
+    r, c = RubyXL::Reference.ref2ind(addr)
+    @worksheet[r][c]
   end
 
   private

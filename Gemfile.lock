@@ -16,6 +16,7 @@ GEM
     pry-byebug (3.2.0)
       byebug (~> 5.0)
       pry (~> 0.10)
+    rack (1.6.4)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -33,7 +34,12 @@ GEM
       nokogiri (>= 1.4.4)
       rubyzip (>= 1.1.6)
     rubyzip (1.1.7)
+    sinatra (1.1.0)
+      rack (~> 1.1)
+      tilt (~> 1.1)
+    sinatra-cross_origin (0.3.2)
     slop (3.6.0)
+    tilt (1.4.1)
 
 PLATFORMS
   ruby
@@ -43,3 +49,5 @@ DEPENDENCIES
   pry-byebug
   rspec
   rubyXL
+  sinatra
+  sinatra-cross_origin
