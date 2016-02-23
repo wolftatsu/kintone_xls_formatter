@@ -8,8 +8,6 @@ class MyExWorkbook
   def initialize(file_path)
     @file_path = file_path
     @workbook = RubyXL::Parser.parse(@file_path)
-    return workbook.defined_names
-
   end
 
   def save()
@@ -20,7 +18,7 @@ class MyExWorkbook
     @workbook.write
   end
 
-  def ranges_ranges()
+  def named_ranges()
     return @workbook.defined_names.each_with_object({}) do |e, o|
       o[e.name] = convert_cell_addr(e.reference)
     end
