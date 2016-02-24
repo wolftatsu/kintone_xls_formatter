@@ -13,6 +13,10 @@ get '/' do
   "Hello, sdp-doc app"
 end
 
+get 'test_post' do 
+  erb :index
+end
+
 post '/sdp_order' do
   rec = params[:record]
   cols = ['order_id','order_date','dest','work_name','place','construction_start','construction_end']
