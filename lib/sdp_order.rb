@@ -3,7 +3,7 @@ require_relative './sdp_document'
 
 class SdpPayment < SdpDocument
 
-  attr_accessor :order_id, :order_date, :dest, :work_name, :place, :construction_start, :construction_end, :source_name, :source_addr1, :source_addr2, :source_telno, :source_faxno
+  attr_accessor :order_id, :order_date, :dest, :work_name, :place, :construction_start, :construction_end, :source_name, :source_addr1, :source_addr2, :source_telno, :source_faxno, :interconnection
 
   def source_path
     "/app/asset/source.xlsx"
