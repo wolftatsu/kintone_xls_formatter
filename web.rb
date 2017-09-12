@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 require 'sinatra'
 require 'sinatra/cross_origin'
+require 'json'
 require_relative 'lib/sdp_order'
 require_relative 'lib/sdp_payment'
+require_relative 'lib/sdp_basic_payment'
 
 configure do
   enable :cross_origin
@@ -40,14 +42,19 @@ post '/sdp_payment' do
   return "/download/#{file_name}"
 end
 
-post '/payment' do
+post '/sdp_b_payment' do
   rec = params[:record]
+  if rec.nil? 
+    payload = JSON.parse(request.body.read)
+    rec = payload['record']
+  end
+  puts rec
   payment = SdpBasicPayment.new()
   fname = payment.write(rec)
-  return "/download/#{file_name}"
+  return "/dl/#{fname}"
 end
 
-get '/download/:target' do
+get '/dl/:target' do
   _file_path = "/tmp/#{params[:target]}"
   # send_file(file_path) if File.exists?(file_path)
   if File.exists?(_file_path)

@@ -20,7 +20,7 @@ class MyExWorkbook
 
   def named_ranges()
     return @workbook.defined_names.each_with_object({}) do |e, o|
-      o[e.name] = convert_cell_addr(e.reference)
+      o[e.name] = convert_cell_addr(e.reference) unless e.name.start_with?('_')
     end
   end
 
