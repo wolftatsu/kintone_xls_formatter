@@ -40,6 +40,13 @@ post '/sdp_payment' do
   return "/download/#{file_name}"
 end
 
+post '/payment' do
+  rec = params[:record]
+  payment = SdpBasicPayment.new()
+  fname = payment.write(rec)
+  return "/download/#{file_name}"
+end
+
 get '/download/:target' do
   _file_path = "/tmp/#{params[:target]}"
   # send_file(file_path) if File.exists?(file_path)
